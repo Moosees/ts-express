@@ -2,7 +2,7 @@ import { Request, Response, Router } from 'express';
 
 const router = Router();
 
-router.get('/login', (req: Request, res: Response) => {
+router.get('/login', (req: Request, res: Response): void => {
   res.send(`
     <form method="POST">
       <div>
@@ -18,9 +18,9 @@ router.get('/login', (req: Request, res: Response) => {
   `);
 });
 
-router.post('/login', (req: Request, res: Response) => {
+router.post('/login', (req: Request, res: Response): void => {
   const { email, password } = req.body;
-  
+
   res.send(`Email: ${email}, password: ${password}`);
 });
 
