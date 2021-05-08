@@ -30,7 +30,13 @@ router.post('/login', (req: RequestWithBody, res: Response): void => {
     return;
   }
 
-  res.send(`Email: ${email}, password: ${password}`);
+  if (email === 'test@test.com' && password === 'abcd') {
+    req.session = { loggedIn: true, secure: false };
+    res.redirect('/');
+    return;
+  }
+
+  res.send('User not found');
 });
 
 export { router };
