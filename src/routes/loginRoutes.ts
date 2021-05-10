@@ -7,6 +7,11 @@ interface RequestWithBody extends Request {
 const router = Router();
 
 router.get('/login', (req: Request, res: Response): void => {
+  if (req.session && req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
   res.send(`
     <form method="POST">
       <div>
@@ -37,6 +42,19 @@ router.post('/login', (req: RequestWithBody, res: Response): void => {
   }
 
   res.send('User not found');
+});
+
+router.get('/', (req: Request, res: Response): void => {
+  if (!req.session || !req.session.loggedIn) {
+    res.redirect('/login');
+    return;
+  }
+
+  res.send(`
+    <div>
+      <p>You are logged in!</p>
+    </div>
+  `);
 });
 
 export { router };
