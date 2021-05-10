@@ -44,6 +44,12 @@ router.post('/login', (req: RequestWithBody, res: Response): void => {
   res.send('User not found');
 });
 
+router.get('/logout', (req: Request, res: Response): void => {
+  req.session = undefined;
+
+  res.redirect('/login');
+});
+
 router.get('/', (req: Request, res: Response): void => {
   if (!req.session || !req.session.loggedIn) {
     res.redirect('/login');
@@ -53,6 +59,7 @@ router.get('/', (req: Request, res: Response): void => {
   res.send(`
     <div>
       <p>You are logged in!</p>
+      <a href="/logout">Logout</a>
     </div>
   `);
 });
