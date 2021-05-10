@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { requireAuth } from '../middleware/auth';
 
 interface RequestWithBody extends Request {
   body: { [key: string]: string | undefined };
@@ -62,6 +63,10 @@ router.get('/', (req: Request, res: Response): void => {
       <a href="/logout">Logout</a>
     </div>
   `);
+});
+
+router.get('/protected', requireAuth, (req: Request, res: Response): void => {
+  res.send('This is the cool place');
 });
 
 export { router };
