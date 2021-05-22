@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
+import { controller } from './decorators/controller';
+import { get } from './decorators/routes';
 
-@controller('/')
-class LoginController {
+@controller('')
+export class LoginController {
   @get('/login')
-  getLogin = (req: Request, res: Response): void => {
+  getLogin(req: Request, res: Response): void {
     if (req.session && req.session.loggedIn) {
       res.redirect('/');
       return;
@@ -22,5 +24,5 @@ class LoginController {
       <button>Submit</button>
     </form>
   `);
-  };
+  }
 }
