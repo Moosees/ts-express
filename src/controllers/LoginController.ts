@@ -14,11 +14,11 @@ export class LoginController {
     <form method="POST">
       <div>
         <label>Email</label>
-        <input name="email" />
+        <input name="email" autocomplete="email" />
       </div>
       <div>
         <label>Password</label>
-        <input name="password" type="password" />
+        <input name="password" type="password" autocomplete="current-password" />
       </div>
       <button>Submit</button>
     </form>
