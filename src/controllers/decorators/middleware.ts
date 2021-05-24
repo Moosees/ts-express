@@ -3,9 +3,9 @@ import { MetadataKeys } from './MetadataKeys';
 
 export const use =
   (middleware: RequestHandler) =>
-  (target: any, key: string, desc: PropertyDescriptor) => {
+  (target: any, propertyKey: string, desc: PropertyDescriptor) => {
     const middlewareList =
-      Reflect.getMetadata(MetadataKeys.Middleware, target, key) || [];
+      Reflect.getMetadata(MetadataKeys.Middleware, target, propertyKey) || [];
 
     middlewareList.push(middleware);
 
@@ -13,6 +13,6 @@ export const use =
       MetadataKeys.Middleware,
       middlewareList,
       target,
-      key
+      propertyKey
     );
   };

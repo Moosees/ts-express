@@ -4,9 +4,9 @@ import { Methods } from './Methods';
 const routeBinder =
   (method: string) =>
   (path: string) =>
-  (target: any, key: string, desc: PropertyDescriptor) => {
-    Reflect.defineMetadata(MetadataKeys.Path, path, target, key);
-    Reflect.defineMetadata(MetadataKeys.Method, method, target, key);
+  (target: any, propertyKey: string, desc: PropertyDescriptor) => {
+    Reflect.defineMetadata(MetadataKeys.Path, path, target, propertyKey);
+    Reflect.defineMetadata(MetadataKeys.Method, method, target, propertyKey);
   };
 
 export const get = routeBinder(Methods.Get);
