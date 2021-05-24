@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { controller, get } from './decorators';
+import { bodyValidator, controller, get, post } from './decorators';
 
 @controller('')
 export class LoginController {
@@ -23,5 +23,26 @@ export class LoginController {
       <button>Submit</button>
     </form>
   `);
+  }
+
+  @post('/login')
+  @bodyValidator('email', 'password')
+  postLogin(req: Request, res: Response): void {
+    const { email, password } = req.body;
+
+    if (email === 'test@test.com' && password === 'abcd') {
+      req.session = { loggedIn: true, secure: false };
+      res.redirect('/');
+      return;
+    }
+
+    res.send('User not found');
+  }
+
+  @get('/logout')
+  getLogout(req: Request, res: Response): void {
+    req.session = undefined;
+
+    res.redirect('/login');
   }
 }
