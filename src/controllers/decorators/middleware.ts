@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 import { MetadataKeys } from './MetadataKeys';
 
-export const use =
+export const useMiddleware =
   (middleware: RequestHandler) =>
   (target: any, propertyKey: string, desc: PropertyDescriptor) => {
     const middlewareList =
